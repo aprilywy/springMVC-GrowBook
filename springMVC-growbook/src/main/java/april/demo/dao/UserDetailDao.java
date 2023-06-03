@@ -6,11 +6,11 @@ import april.demo.entity.UserDetail;
 
 public interface UserDetailDao {
 
-	public UserDetail getUserDetail(Integer id);
+	public UserDetail getUserDetail(int id);
 	
 	public void addUserDetail(UserDetail userDetail);
 	
-	public boolean deleteUserDetail(Integer id);
+	public boolean deleteUserDetail(int id);
 	
 	public boolean updateUserDetail(UserDetail userDetail);
 	

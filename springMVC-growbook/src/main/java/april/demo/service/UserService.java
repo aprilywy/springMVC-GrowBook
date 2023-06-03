@@ -7,13 +7,13 @@ import april.demo.entity.User;
 
 public interface UserService {
 
-	User getUser(Integer id);
+	User getUser(int id);
 	
 	User getUser(String nameOrEmail);
 	
 	void addUser(User user);
 	
-	Response deleteUser(Integer id);
+	Response deleteUser(int id);
 	
 	boolean updateUser(User user);
 	

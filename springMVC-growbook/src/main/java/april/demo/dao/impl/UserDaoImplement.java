@@ -17,7 +17,7 @@ public class UserDaoImplement implements UserDao {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public User getUser(Integer id) {
+	public User getUser(int id) {
 		String hql = "from User where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, id);
@@ -45,7 +45,7 @@ public class UserDaoImplement implements UserDao {
 	}
 
 	@Override
-	public boolean deleteUser(Integer id) {
+	public boolean deleteUser(int id) {
 		String hql = "delete User where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, id);

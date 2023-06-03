@@ -26,6 +26,31 @@
 <body>
 	<!-- navbar -->
 	<jsp:include page="parts/header.jsp" />
+	<!-- content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+				<div class="jumbotron">
+					<h1>歡迎來到購物車</h1>
+					<p>您的購物車清單為</p>
+				</div>
+			</div>
+			<div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+				<table class="table table-havor center" id="cartTable"></table>
+				<hr/>
+				<div class="row">
+					<div class="col-lg-4 col-md-4 col-sm-4"></div>
+					<button type="button" class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-4" onlcick="">確認購買</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- footer -->
+	<jsp:include page="parts/foot.jsp" />
+	
+	<script type="text/javascript">
+	// todo (fat): 按鈕動作之後補
+	</script>
 
 </body>
 </html>

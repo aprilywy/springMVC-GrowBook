@@ -16,7 +16,7 @@ public class UserDetailServiceImplement implements UserDetailService {
 	private UserDetailDao userDetailDao; 
 	
 	@Override
-	public UserDetail getUserDetail(Integer id) {
+	public UserDetail getUserDetail(int id) {
 		
 		return userDetailDao.getUserDetail(id);
 	}
@@ -28,7 +28,7 @@ public class UserDetailServiceImplement implements UserDetailService {
 	}
 
 	@Override
-	public boolean deleteUserDetail(Integer id) {
+	public boolean deleteUserDetail(int id) {
 		
 		return userDetailDao.deleteUserDetail(id);
 	}

@@ -27,7 +27,7 @@
 	<jsp:include page="parts/header.jsp" />
 	<!-- content -->
 	<div class="container-fluid">
-		<h1 class="title center">註冊</h1>
+		<h1 class="title center">修改個人資料</h1>
 		<br />
 		<div class="col-sm-offset-2 col-md-offset-2">
 			<div class="form-horizontal">
@@ -101,7 +101,7 @@
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-md-6">
 						<button class="btn btn-lg btn-primary btn-block" type="submit"
-							onclick="startRegister()">註冊</button>
+							onclick="">確認修改</button>
 					</div>
 				</div>
 			</div>
@@ -113,91 +113,7 @@
 	<jsp:include page="parts/foot.jsp" />
 
 	<script type="text/javascript">
-		function startRegister() {
-			var loading = layer.load(0);
-			var user = {};
-			user.username = document.getElementById("inputUsername").value;
-			user.email = document.getElementById("inputEmail").value;
-			user.nickName = document.getElementById("inputNickName").value;
-			user.password = document.getElementById("inputPassword").value;
-			user.phoneNumber = document.getElementById("inputPhoneNumber").value;
-			user.birthday = document.getElementById("inputBirthday").value;
-			user.postNumber = document.getElementById("inputPostcodes").value;
-			user.address = document.getElementById("inputAddress").value;
-			user.gender = 0;
-			if (document.getElementById("woman").checked) {
-				user.gender = 1;
-			}
-			if (user.username == '') {
-				layer.msg('帳號不能為空', {
-					icon : 2
-				});
-				return;
-			} else if (user.username.length >= 12) {
-				layer.msg('帳號長度不能超過12個字', {
-					icon : 2
-				});
-				return;
-			} else if (user.nickName == '') {
-				layer.msg('暱稱不能為空', {
-					icon : 2
-				});
-				return;
-			} else if (user.nickName.length >= 15) {
-				layer.msg('暱稱長度不能超過15個字', {
-					icon : 2
-				});
-				return;
-			} else if (user.password == '') {
-				layer.msg('密碼不能為空', {
-					icon : 2
-				});
-				return;
-			} else if (user.password.length >= 20) {
-				layer.msg('密碼長度不能超過20個字', {
-					icon : 2
-				});
-				return;
-			}
-
-			var registerResult = null;
-
-			$.ajax({
-				async : false,
-				type : 'POST',
-				url : '${cp}/doRegister',
-				data : user,
-				dataType : 'json',
-				success : function(result) {
-					registerResult = result.result;
-				},
-				error : function(result) {
-					layer.alert('搜尋用戶錯誤');
-				}
-			});
-			if (registerResult == 'success') {
-				layer.close(loading);
-				layer.msg('註冊成功', {
-					icon : 1
-				});
-				window.location.href = "${cp}/login";
-			} else if (registerResult == 'nameExist') {
-				layer.close(loading);
-				layer.msg('這個帳號有人使用過了', {
-					icon : 2
-				});
-			} else if (registerResult == 'emailExist') {
-				layer.close(loading);
-				layer.msg('這個信箱有人使用過了', {
-					icon : 2
-				});
-			} else if (registerResult == 'fail') {
-				layer.close(loading);
-				layer.msg('伺服器異常', {
-					icon : 2
-				});
-			}
-		}
+		// TODO 動作之後補
 	</script>
 
 </body>

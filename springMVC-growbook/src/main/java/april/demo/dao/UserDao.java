@@ -6,13 +6,13 @@ import april.demo.entity.User;
 
 public interface UserDao {
 
-	User getUser(Integer id);
+	User getUser(int id);
 	
 	User getUser(String nameOrEmail);
 	
 	void addUser(User user);
 	
-	public boolean deleteUser(Integer id);
+	public boolean deleteUser(int id);
 	
 	public boolean updateUser(User user);
 	

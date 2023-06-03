@@ -30,120 +30,74 @@
 	<!-- content -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar sidebar-1">
-				<ul class="nav nav-sidebar">
-					<li class="list-group-item-diy"><a href="#productArea1">心理學
-							<span class="sr-only">(current)</span>
-					</a></li>
-					<li class="list-group-item-diy"><a href="#productArea2">小說</a></li>
-					<li class="list-group-item-diy"><a href="#productArea3">其他</a></li>
-				</ul>
+			<div class="col-sm-1 col-md-1"></div>
+			<div class="col-sm-10 col-md-10">
+				<h1>${productDetail.name}</h1>
+				<hr />
 			</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div class="jumbotron">
-					<h1>歡迎光臨萌芽書屋</h1>
-				</div>
-				<div name="productArea1" class="row pd-10" id="productArea1">
-				</div>
-
-				<div name="productArea2" class="row" id="productArea2"></div>
-
-				<div name="productArea3" class="row" id="productArea3"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1 col-md-1"></div>
+			<div class="col-sm-5 col-md-5">
+				<img class="detail-img" src="${cp}/img/${product.id}.jpg">
 			</div>
-			
-			<!-- footer -->
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-				<jsp:include page="parts/foot.jsp" />
+			<div class="col-sm-5 col-md-5 detail-x">
+				<table class="table table-striped">
+					<tr>
+						<th>商品名稱</th>
+						<th>${product.name}</th>
+					</tr>
+					<tr>
+						<th>商品價格</th>
+						<th>${product.price}</th>
+					</tr>
+					<tr>
+						<th>商品描述</th>
+						<th>${product.description}</th>
+					</tr>
+					<tr>
+						<th>商品類別</th>
+						<th>${product.type}</th>
+					</tr>
+					<tr>
+						<th>商品庫存</th>
+						<th>${product.counts}</th>
+					</tr>
+					<tr>
+						<th>商品數量</th>
+						<td>
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default" onclick="">-</button>
+								<button id="productCounts" type="button" class="btn btn-default">1</button>
+								<button type="button" class="btn btn-default" onclick="">+</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div class="row">
+					<div class="col-sm-1 col-md-1 col-lg-1"></div>
+					<button class="btn btn-danger btn-lg col-sm-4 col-lg-4" onclick="">添加購物車</button>
+					<div class="col-sm-2 col-md-1 col-lg-2"></div>
+					<button class="btn btn-danger btn-lg col-sm-4 col-lg-4" onclick="">購買</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1 col-md-1 col-lg-1"></div>
+			<div class="col-sm-10 col-md-10 col-lg-10">
+				<hr class="division" />
+				<table class="table evaluationTable" border="0" id="evaluation">
+				</table>
+				<hr />
+				<div id="inputArea"></div>
 			</div>
 		</div>
 	</div>
+	<!-- footer -->
+	<jsp:include page="parts/foot.jsp" />
 
 	<script type="text/javascript">
-		var loading = layer.load(0);
-
-		var productType = new Array;
-		productType[1] = "心理學";
-		productType[2] = "小說";
-		productType[3] = "其他";
-
-		listProducts();
-
-		function listProducts() {
-			var allProduct = getAllProducts();
-			var mark = new Array;
-			mark[1] = 0;
-			mark[2] = 0;
-			mark[3] = 0;
-
-			for (var i = 0; i < allProduct.length; i++) {
-				var html = "";
-				var imgURL = "img/" + allProduct[i].id + ".jpg";
-				html += '<div class="col-sm-4 col-md-4" >'
-						+ '<div class="boxes pointer" onclick="productDetail('
-						+ allProduct[i].id + ')">' + '<div class="big bigimg">'
-						+ '<img src="'+imgURL+'">' + '</div>'
-						+ '<p class="product-name">' + allProduct[i].name
-						+ '</p>' + '<p class="product-price">$'
-						+ allProduct[i].price + '</p>' + '</div>' + '</div>';
-				var id = "productArea" + allProduct[i].type;
-				var productArea = document.getElementById(id);
-				if (mark[allProduct[i].type] == 0) {
-					html = '<hr/><h1>' + productType[allProduct[i].type]
-							+ '</h1><hr/>' + html;
-					mark[allProduct[i].type] = 1;
-				}
-				productArea.innerHTML += html;
-			}
-			layer.close(loading);
-		}
-
-		function getAllProducts() {
-			var allProducts = null;
-			var nothing = {};
-			$.ajax({
-				async : false,
-				type : 'POST',
-				url : '${cp}/getAllProducts',
-				data : nothing,
-				dataType : 'json',
-				success : function(result) {
-					if (result != null) {
-						allProducts = result.allProducts;
-					} else {
-						layer.alert('查詢AllProducts()錯誤');
-					}
-				},
-				error : function(result) {
-					layer.alert('查詢getAllProducts()錯誤');
-				}
-			});
-			allProducts = eval("(" + allProducts + ")");
-			return allProducts;
-		}
-
-		function productDetail(id) {
-			var product = {};
-			var jumpResult = '';
-			product.id = id;
-			$.ajax({
-				async : false,
-				type : 'POST',
-				url : '${cp}/productDetail',
-				data : product,
-				dataType : 'json',
-				success : function(result) {
-					jumpResult = result.result;
-				},
-				error : function(result) {
-					layer.alert('查詢productDetail(id)錯誤');
-				}
-			});
-
-			if (jumpResult == "success") {
-				window.location.href = "${cp}/product_detail";
-			}
-		}
-		
+		// TODO 動作之後補
 	</script>
 </body>
 </html>
