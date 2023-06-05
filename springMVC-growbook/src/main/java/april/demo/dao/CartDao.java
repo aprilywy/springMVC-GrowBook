@@ -6,13 +6,17 @@ import april.demo.entity.Cart;
 
 public interface CartDao {
 
-	public Cart cart(int userId, int ProductId);
+	Cart getCart(int userId, int productId);
 	
-	public void addCart(Cart cart);
+	void addCart(Cart cart);
 	
-	public boolean deleteCart(int userId,int productId);
+	boolean deleteCart(int userId,int productId);
 	
-	public boolean updateCart(Cart cart);
+	boolean updateCart(Cart cart);
 	
-	public List<Cart> getCarts(int userId);
+	List<Cart> getCarts(int userId);
+	
+	boolean deleteCartByUser(int userId);
+	
+	boolean deleteCartByProduct(int productId);
 }

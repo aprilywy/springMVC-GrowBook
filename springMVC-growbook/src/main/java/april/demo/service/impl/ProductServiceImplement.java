@@ -7,6 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import april.demo.dao.CartDao;
+import april.demo.dao.EvaluationDao;
+import april.demo.dao.OrderDao;
 import april.demo.dao.ProductDao;
 import april.demo.dto.Response;
 import april.demo.entity.Product;
@@ -17,6 +20,15 @@ public class ProductServiceImplement implements ProductService {
 
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
+	private CartDao cartDao;
+	
+	@Autowired
+	private EvaluationDao evaluationDao;
 	
 	@Override
 	public Product getProduct(int id) {
@@ -36,8 +48,10 @@ public class ProductServiceImplement implements ProductService {
 	@Override
 	@Transactional
 	public Response deleteProduct(int id) {
-		// TODO evaluationDao, cartDao, orderDao 完成後再回來補上
 		try {
+			evaluationDao.deleteEvaluationByProduct(id);
+			cartDao.deleteCartByProduct(id);
+			orderDao.deleteOrderByProductId(id);
 			productDao.deleteProduct(id);
 			return new Response(1, "刪除商品成功", null);
 		} catch (Exception e) {
@@ -46,7 +60,7 @@ public class ProductServiceImplement implements ProductService {
 	}
 
 	@Override
-	public boolean updaateProduct(Product product) {
+	public boolean updateProduct(Product product) {
 		return productDao.updateProduct(product);
 	}
 

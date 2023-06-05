@@ -6,13 +6,13 @@ import april.demo.entity.UserDetail;
 
 public interface UserDetailDao {
 
-	public UserDetail getUserDetail(int id);
+	UserDetail getUserDetail(int id);
 	
-	public void addUserDetail(UserDetail userDetail);
+	void addUserDetail(UserDetail userDetail);
 	
-	public boolean deleteUserDetail(int id);
+	boolean deleteUserDetail(int id);
 	
-	public boolean updateUserDetail(UserDetail userDetail);
+	boolean updateUserDetail(UserDetail userDetail);
 	
-	public List<UserDetail> getAllUserDetail();
+	List<UserDetail> getAllUserDetail();
 }

@@ -15,7 +15,7 @@ public interface ProductService {
 	
 	Response deleteProduct(int id);
 	
-	public boolean updaateProduct(Product product);
+	public boolean updateProduct(Product product);
 	
 //	public List<Product> getProductsByKeyWord(String searchKeyWord);
 	
