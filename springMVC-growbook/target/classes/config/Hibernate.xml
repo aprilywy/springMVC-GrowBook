@@ -28,14 +28,6 @@
 	</bean>
 
 
-	<!-- init database, create table and insert init data -->
-	<jdbc:initialize-database
-		data-source="dataSource">
-		<jdbc:script location="classpath:/database/schema.sql"
-			encoding="UTF-8" />
-		<jdbc:script location="classpath:/database/data.sql"
-			encoding="UTF-8" />
-	</jdbc:initialize-database>
 
 	<!-- Hibernate session factory -->
 	<bean id="sessionFactory"
@@ -47,6 +39,7 @@
 				<prop key="hibernate.hbm2ddl.auto">${jdbc.dataSource.hbm2ddl.auto}</prop>
 				<prop key="hibernate.show_sql">${jdbc.dataSource.showSql}</prop>
 				<prop key="hibernate.format_sql">${jdbc.dataSource.formatSql}</prop>
+				<prop key="hibernate.globally_quoted_identifiers">${jdbc.dataSource.globally_quoted_identifiers}</prop>
 
 				<prop key="hibernate.cache.use_second_level_cache">${jdbc.dataSource.cache.useSecondLevelCache}</prop>
 				<prop key="hibernate.cache.use_query_cache">${jdbc.dataSource.cache.useQueryCache}</prop>
@@ -57,7 +50,7 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>april.demo.Entity</value>
+				<value>april.demo.entity</value>
 			</list>
 		</property>
 	</bean>

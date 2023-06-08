@@ -2,7 +2,7 @@ package april.demo.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,7 +20,7 @@ public class UserDaoImplement implements UserDao {
 	public User getUser(int id) {
 		String hql = "from User where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, id);
+		query.setParameter("id", id);
 		return (User) query.uniqueResult();
 	}
 
@@ -28,12 +28,12 @@ public class UserDaoImplement implements UserDao {
 	public User getUser(String nameOrEmail) {
 		String hql = "from User where email = :email";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, nameOrEmail);
+		query.setParameter("email", nameOrEmail);
 		
 		if (query.uniqueResult() == null) {
-			hql = "from User where name = :name";
+			hql = "from User where username = :username";
 			query = sessionFactory.getCurrentSession().createQuery(hql);
-			query.setParameter(0, nameOrEmail);
+			query.setParameter("username", nameOrEmail);
 		}
 		return (User) query.uniqueResult();
 	}
@@ -48,7 +48,7 @@ public class UserDaoImplement implements UserDao {
 	public boolean deleteUser(int id) {
 		String hql = "delete User where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, id);
+		query.setParameter("id", id);
 		return query.executeUpdate() > 0;
 	}
 
@@ -56,10 +56,10 @@ public class UserDaoImplement implements UserDao {
 	public boolean updateUser(User user) {
 		String hql = "update User set username = :username, email = :email, nickName = :nickName where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, user.getUsername());
-		query.setParameter(1, user.getEmail());
-		query.setParameter(2, user.getNickName());
-		query.setParameter(3, user.getId());
+		query.setParameter("username", user.getUsername());
+		query.setParameter("email", user.getEmail());
+		query.setParameter("nickName", user.getNickName());
+		query.setParameter("id", user.getId());
 		return query.executeUpdate() > 0;
 	}
 

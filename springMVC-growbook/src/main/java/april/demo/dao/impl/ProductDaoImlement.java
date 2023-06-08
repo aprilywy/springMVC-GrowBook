@@ -3,7 +3,7 @@ package april.demo.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,17 +18,17 @@ public class ProductDaoImlement implements ProductDao {
 	
 	@Override
 	public Product getProduct(int id) {
-		String hql = "from product where id = :id";
+		String hql = "from Product where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, id);
+		query.setParameter("id", id);
 		return (Product) query.uniqueResult();
 	}
 
 	@Override
 	public Product getProduct(String name) {
-		String hql = "from product where name = :name";
+		String hql = "from Product where name = :name";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, name);
+		query.setParameter("name", name);
 		return (Product) query.uniqueResult();
 	}
 
@@ -41,7 +41,7 @@ public class ProductDaoImlement implements ProductDao {
 	public boolean deleteProduct(int id) {
 		String hql = "delete Product where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, id);
+		query.setParameter("id", id);
 		return query.executeUpdate() > 0;
 	}
 
@@ -49,14 +49,14 @@ public class ProductDaoImlement implements ProductDao {
 	public boolean updateProduct(Product product) {
 		String hql = "update Product set name = :name, auther = :auther, description = :description, keyWord = :keyWord, price = :price, counts= :counts, type = :type where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, product.getName());
-		query.setParameter(1, product.getAuther());
-		query.setParameter(2, product.getDescription());
-		query.setParameter(3, product.getKeyWord());
-		query.setParameter(4, product.getPrice());
-		query.setParameter(5, product.getCounts());
-		query.setParameter(6, product.getType());
-		query.setParameter(7, product.getId());
+		query.setParameter("name", product.getName());
+		query.setParameter("auther", product.getAuther());
+		query.setParameter("description", product.getDescription());
+		query.setParameter("keyWord", product.getKeyWord());
+		query.setParameter("price", product.getPrice());
+		query.setParameter("counts", product.getCounts());
+		query.setParameter("type", product.getType());
+		query.setParameter("id", product.getId());
 		return query.executeUpdate() > 0;
 	}
 

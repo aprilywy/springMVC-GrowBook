@@ -15,25 +15,25 @@ public class UserDetail {
 	@GeneratedValue(generator = "generator")
 	@GenericGenerator(name = "generator", strategy = "assigned")
 	@Id
-	@Column(name = "id")
+	@Column(name = "`id`")
 	private Integer id;
 	
-	@Column(name = "password")
+	@Column(name = "`password`")
 	private String password;
 	
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "gender")
+	@Column(name = "`gender`")
 	private Integer gender;
 	
-	@Column(name = "birthday")
+	@Column(name = "`birthday`")
 	private String birthday;
 	
-	@Column(name = "post_umber")
+	@Column(name = "post_number")
 	private String postNumber;
 	
-	@Column(name = "address")
+	@Column(name = "`address`")
 	private String address;
 	
 	@Column(name = "register_time")

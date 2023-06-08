@@ -52,7 +52,6 @@ public class UserServiceImplement implements UserService {
 	@Override
 	@Transactional
 	public Response deleteUser(int id) {
-		// TODO 再加上確認是否存在購買記錄、評價紀錄、購物車紀錄，如果存在，則應該先刪除對應的紀錄，否則後續刪除要拋出錯誤
 		try {
 			evaluationDao.deleteEvaluationByUser(id);
 			orderDao.deleteOrderByUser(id);

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="cp" value="${pageContext.request.contextPath}" />
+<c:set var="cp" scope="page" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -9,14 +9,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-VA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>萌芽書屋</title>
-
+<link rel="stylesheet" type="text/css" href="${cp}/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="${cp}/css/style.css" />
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/layer.js"></script>
@@ -49,9 +44,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="inputNickname" class="col-sm-2 col-md-2 ocntrol-lebal">暱稱</label>
+					<label for="inputNickName" class="col-sm-2 col-md-2 ocntrol-lebal">暱稱</label>
 					<div class="col-sm-6 col-md-6">
-						<input type="text" class="form-control" id="inputNickname"
+						<input type="text" class="form-control" id="inputNickName"
 							placeholder="請輸入暱稱" />
 					</div>
 				</div>
@@ -75,7 +70,7 @@
 					<div class="col-sm-6 col-md-6">
 						<label class="radio-inline"> <input type="radio" id="man"
 							value="option1">男
-						</label> <label class="radio-inline"> <input type="radio" id="man"
+						</label> <label class="radio-inline"> <input type="radio" id="woman"
 							value="option2">女
 						</label>
 					</div>

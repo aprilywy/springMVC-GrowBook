@@ -3,7 +3,7 @@ package april.demo.dao.impl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +20,7 @@ public class UserDetailDaoImplement implements UserDetailDao {
 	public UserDetail getUserDetail(int id) {
 		String hql = "from UserDetail where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, id);
+		query.setParameter("id", id);
 		return (UserDetail) query.uniqueResult();
 	}
 
@@ -34,7 +34,7 @@ public class UserDetailDaoImplement implements UserDetailDao {
 	public boolean deleteUserDetail(int id) {
 		String hql = "delete UserDetail where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, id);
+		query.setParameter("id", id);
 		return query.executeUpdate() > 0;
 	}
 
@@ -42,13 +42,13 @@ public class UserDetailDaoImplement implements UserDetailDao {
 	public boolean updateUserDetail(UserDetail userDetail) {
 		String hql = "update UserDetail set password = :password, phoneNumber = :phoneNumber, gender = :gender, birthday = :birthday, postNumber = :postNumber, address = :address where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, userDetail.getPassword());
-		query.setParameter(1, userDetail.getPhoneNumber());
-		query.setParameter(2, userDetail.getGender());
-		query.setParameter(3, userDetail.getBirthday());
-		query.setParameter(4, userDetail.getPostNumber());
-		query.setParameter(5, userDetail.getAddress());
-		query.setParameter(6, userDetail.getId());
+		query.setParameter("password", userDetail.getPassword());
+		query.setParameter("phoneNumber", userDetail.getPhoneNumber());
+		query.setParameter("gender", userDetail.getGender());
+		query.setParameter("birthday", userDetail.getBirthday());
+		query.setParameter("postNumber", userDetail.getPostNumber());
+		query.setParameter("address", userDetail.getAddress());
+		query.setParameter("id", userDetail.getId());
 		return query.executeUpdate() > 0;
 	}
 

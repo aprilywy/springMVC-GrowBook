@@ -15,19 +15,19 @@ public class User {
 	@GeneratedValue(generator = "generator")
 	@GenericGenerator(name = "generator",strategy = "increment")
 	@Id
-	@Column(name = "id")
+	@Column(name = "`id`")
 	private Integer id;
 	
-	@Column(name = "username")
+	@Column(name = "`username`")
 	private String username;
 	
-	@Column(name = "email")
+	@Column(name = "`email`")
 	private String email;
 	
 	@Column(name = "nick_name")
 	private String nickName;
 	
-	@Column(name = "role")
+	@Column(name = "`role`")
 	private Integer role;
 	
 	public User() {

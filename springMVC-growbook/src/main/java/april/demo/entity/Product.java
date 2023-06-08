@@ -15,10 +15,10 @@ public class Product {
 	@GeneratedValue(generator = "generator")
 	@GenericGenerator(name = "generator",strategy = "increment")
 	@Id
-	@Column(name = "id")
+	@Column(name = "`id`")
 	private Integer id;
 	
-	@Column(name = "name")
+	@Column(name = "`name`")
 	private String name;
 	
 	@Column(name = "auther")
@@ -30,13 +30,13 @@ public class Product {
 	@Column(name = "key_word")
 	private String keyWord;
 	
-	@Column(name = "price")
+	@Column(name = "`price`")
 	private Integer price;
 	
-	@Column(name = "count")
+	@Column(name = "`counts`")
 	private Integer counts;
 	
-	@Column(name = "type")
+	@Column(name = "`type`")
 	private Integer type;
 
 	public Product() {

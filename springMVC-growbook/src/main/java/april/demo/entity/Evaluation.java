@@ -20,10 +20,10 @@ public class Evaluation {
 	@Column(name = "product_id")
 	private Integer productId;
 	
-	@Column(name = "time")
+	@Column(name = "`time`")
 	private String time;
 	
-	@Column(name = "context")
+	@Column(name = "`content`")
 	private String content;
 
 	public Evaluation() {

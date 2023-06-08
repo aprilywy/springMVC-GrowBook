@@ -20,7 +20,7 @@ public class Order {
 	@Column(name = "product_id")
 	private Integer productId;
 	
-	@Column(name = "time")
+	@Column(name = "`time`")
 	private String time;
 	
 	@Column(name = "order_status")
@@ -29,7 +29,7 @@ public class Order {
 	@Column(name = "product_price")
 	private Integer productPrice;
 	
-	@Column(name = "counts")
+	@Column(name = "`counts`")
 	private Integer counts;
 
 	public Order() {

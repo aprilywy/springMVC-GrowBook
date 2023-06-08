@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import april.demo.dto.CartPriKey;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "`cart`")
 @IdClass(value = CartPriKey.class)
 public class Cart {
 
@@ -23,7 +23,7 @@ public class Cart {
 	@Column(name = "product_price")
 	private Integer productPrice;
 	
-	@Column(name = "counts")
+	@Column(name = "`counts`")
 	private Integer counts;
 
 	public Cart() {
