@@ -29,7 +29,7 @@ public class EvaluationController {
 	
 	@RequestMapping(value = "/addShoppingEvaluation", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addShoppingEvaluation(int userId, int productId, String tontent) {
+	public Map<String, Object> addShoppingEvaluation(int userId, int productId, String content) {
 		System.out.println("我添加了" + userId + " " + productId);
 		String result = null;
 		if (orderService.getUserProductRecord(userId, productId)) {
@@ -39,7 +39,7 @@ public class EvaluationController {
 			Date date = new Date();
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 			evaluation.setTime(sf.format(date));
-			evaluation.setContent(tontent);
+			evaluation.setContent(content);
 			evaluationService.addEvaluation(evaluation);
 			result = "success";
 		} else {

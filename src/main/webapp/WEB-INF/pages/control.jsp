@@ -233,7 +233,7 @@
 			productArea.innerHTML += html;
 		}
 
-		// 列出所以商品
+		// 列出所有商品
 		function getAllProducts() {
 			var allProducts = null;
 			var nothing = {};

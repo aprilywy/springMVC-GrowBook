@@ -29,14 +29,14 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@RequestMapping(value = "/orders")
-	public String orders() {
-		return "orders";
+	@RequestMapping(value = "/order")
+	public String order() {
+		return "order";
 	}
 	
 	@RequestMapping(value = "/order_handle")
 	public String order_handle() {
-		return "order_Handle";
+		return "order_handle";
 	}
 	
 	@RequestMapping(value = "/addOrder", method = RequestMethod.POST)
@@ -96,8 +96,11 @@ public class OrderController {
 	@ResponseBody
 	public Map<String, Object> getOrdersByOrderStatus(int orderStatus) {
 		List<Order> orderList = orderService.getOrdersByOrderStatus(orderStatus);
-		
-		return null;
+		Gson gson = new Gson();
+		String orders = gson.toJson(orderList);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("result",orders);
+		return resultMap;
 	}
 	
 	@RequestMapping(value = "/getAllOrders",method = RequestMethod.POST)

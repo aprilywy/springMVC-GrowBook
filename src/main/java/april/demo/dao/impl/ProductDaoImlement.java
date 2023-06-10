@@ -15,7 +15,7 @@ public class ProductDaoImlement implements ProductDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public Product getProduct(int id) {
 		String hql = "from Product where id = :id";
@@ -47,10 +47,10 @@ public class ProductDaoImlement implements ProductDao {
 
 	@Override
 	public boolean updateProduct(Product product) {
-		String hql = "update Product set name = :name, auther = :auther, description = :description, keyWord = :keyWord, price = :price, counts= :counts, type = :type where id = :id";
+		String hql = "update Product set name = :name, author = :author, description = :description, keyWord = :keyWord, price = :price, counts= :counts, type = :type where id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("name", product.getName());
-		query.setParameter("auther", product.getAuther());
+		query.setParameter("author", product.getAuthor());
 		query.setParameter("description", product.getDescription());
 		query.setParameter("keyWord", product.getKeyWord());
 		query.setParameter("price", product.getPrice());

@@ -42,7 +42,7 @@
 					<div class="col-lg-4 col-md-4 col-sm-4"></div>
 					<button type="button"
 						class="btn btn-danger btn-lg col-lg-4 col-md-4 col-sm-4"
-						onlcick="confirmPre()">確認購買</button>
+						onclick="confirmPre()">確認購買</button>
 				</div>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 		function confirmPre() {
 			var allCarts = getCarts();
 			var buyProducts = new Array;
-			var buyProductCounts = new Array;
+			var buyProductsCounts = new Array;
 			var buyCounts = 0;
 			for (var i = 0; i < allCarts.length; i++) {
 				var checkBox = document.getElementById("checkbox"+allCarts[i].productId);
@@ -145,7 +145,7 @@
 			}
 
 		function judgeIsLogin() {
-			if("${currentUser.id}" == null "${currentUser.id}" == undefined || "${currentUser.id}" =="") {
+			if("${currentUser.id}" == null || "${currentUser.id}" == undefined || "${currentUser.id}" =="") {
 				window.location.href = "${cp}/login";
 				}
 			}
@@ -159,7 +159,7 @@
 					'<div class="col-sm-10 col-md-10 col-lg-10">'+
 					'<table class="taable confirm-margin">';
 			for (var i = 0; i < productsId.length; i++) {
-				var product = getProductById(productId[i]);
+				var product = getProductById(productsId[i]);
 				html += '<tr>'+
 					'<th>商品'+(i+1)+'名稱：</th>'+
 					'<td>'+product.name+'</td>'+
@@ -173,7 +173,7 @@
 					'<td>'+productsCounts[i]+'</td>'+
 					'</tr>'+
 					'<tr>';
-				totalPrice+=product*productsCounts[i];
+				totalPrice+=product.price*productsCounts[i];
 				}
 			html +='<th>總金額：</th>'+
 					'<td>'+totalPrice+'</td>'+
@@ -189,7 +189,7 @@
 					'</table>'+
 					'<div class="row">'+
 					'<div class="col-sm-4 col-md-4 col-lg-4"></div>'+
-					'<button class="btn btn-danger col-sm-4 col-md-4 col-lg-4" onclick="addToCartPre(['+productsId+'],['+productsCounts+'])">確認購買</button>'+
+					'<button class="btn btn-danger col-sm-4 col-md-4 col-lg-4" onclick="addToOrdersPre(['+productsId+'],['+productsCounts+'])">確認購買</button>'+
 					'</div>'+
 					'</div>';
 			layer.open({
@@ -207,7 +207,7 @@
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : '{cp}/getUserAddressAndPhoneNumber',
+				url : '${cp}/getUserAddressAndPhoneNumber',
 				data : user,
 				dataType : 'json',
 				success : function(result) {
@@ -242,7 +242,7 @@
 
 		function addToOrdersPre(productsId, productsCounts) {
 			for(var i = 0; i < productsId.length; i++){
-				addOrders(productsId[i],productsCounts[i]);
+				addToOrders(productsId[i],productsCounts[i]);
 				}
 			layer.confirm('前往訂單狀態？', {icon:1, title:'購買成功',btn:['前往訂單','繼續購買']},
 					function(){
@@ -278,7 +278,7 @@
 			if(buyResult == "success") {
 				deleteCart(productId);
 				layer.msg("商品 "+product.name+" 購買成功",{icon:1});
-			} else if {
+			} else if(buyResult =="unEnough") {
 				layer.alert("商品 "+poduct.name+" 庫存不足，購買失敗");
 				}
 			}

@@ -1,4 +1,4 @@
-create database if not exists growbook character set utf8 collate utf8_general_ci;
+create database if not exists growbook character set utf8mb4 collate utf8mb4_unicode_ci;
 
 use growbook;
 
@@ -36,7 +36,7 @@ create table if not exists user_detail(
 create table if not exists products(
 	id int(30) not null,
 	name varchar(50) not null,
-	auther varchar(20) not null,
+	author varchar(20) not null,
 	description varchar(1000) not null,
 	key_word varchar(1000) not null,
 	price int not null,

@@ -54,7 +54,7 @@
 					</tr>
 					<tr>
 						<th>作者名稱</th>
-						<th>${productDetail.auther}</th>
+						<th>${productDetail.author}</th>
 					</tr>
 					<tr>
 						<th>商品描述</th>
@@ -84,10 +84,10 @@
 				<div class="row">
 					<div class="col-sm-1 col-md-1 col-lg-1"></div>
 					<button class="btn btn-danger btn-lg col-sm-4 col-lg-4"
-						onclick="addCart(${product.id})">添加購物車</button>
+						onclick="addToCart(${productDetail.id})">添加購物車</button>
 					<div class="col-sm-2 col-md-1 col-lg-2"></div>
 					<button class="btn btn-danger btn-lg col-sm-4 col-lg-4"
-						onclick="buyConfirm(${product.id})">購買</button>
+						onclick="buyConfirm(${productDetail.id})">購買</button>
 				</div>
 			</div>
 		</div>
@@ -108,7 +108,7 @@
 	<script type="text/javascript">
 		listEvaluations();
 
-		function addCart(productId) {
+		function addToCart(productId) {
 			judgeIsLogin();
 			var productCounts = document.getElementById("productCounts");
 			var counts = parseInt(productCounts.innerHTML);
@@ -127,16 +127,16 @@
 					addResult = result.result;
 					},
 					error : function(result) {
-						Layer.alert('查詢用戶錯誤');
+						layer.alert('查詢用戶錯誤');
 						}
 				});
 				if (addResult == "success") {
-					Layer.confirm('前往購物車？', {icon: 1, title:'添加成功',btn:['前往購物車','繼續瀏覽']},
+					layer.confirm('前往購物車？', {icon: 1, title:'添加成功',btn:['前往購物車','繼續瀏覽']},
 							function(){
 								window.location.href = "${cp}/cart";
 							},
 							function(index){
-								Layer.close(index);
+								layer.close(index);
 							}
 					);
 				}
@@ -152,6 +152,15 @@
 			var productCounts = document.getElementById("productCounts");
 			var counts = parseInt(productCounts.innerHTML);
 			if (counts >= 2) {
+				counts--;
+				}
+			productCounts.innerHTML = counts;
+			}
+
+		function addCounts() {
+			var productCounts = document.getElementById("productCounts");
+			var counts = parseInt(productCounts.innerHTML);
+			if(counts < ${productDetail.counts}){
 				counts++;
 				}
 			productCounts.innerHTML = counts;
@@ -162,8 +171,8 @@
 			var address = getUserAddress("${currentUser.id}");
 			var phoneNumber = getUserPhoneNumber("${currentUser.id}");
 			var productCounts = document.getElementById("productCounts");
-			var counts = praseInt(productCounts.innerHTML);
-			var product = getProductById(prodcutId);
+			var counts = parseInt(productCounts.innerHTML);
+			var product = getProductById(productId);
 			var html = '<div class="col-sm-1 col-md-1 col-lg-1"></div>' +
 					'<div class="col-sm-10 col-md-10 col-lg-10">' +
 					'<table class="table confirm-margin">' +
@@ -197,7 +206,7 @@
 					'<button class="btn btn-danger col-sm-4 col-lg-4" onclick="addToOrders('+productId+')">確認購買</button>' +
 					'</div>' +
 					'</div>';
-			Layer.open({
+			layer.open({
 				type:1,
 				title:'請確認訂單訊息：',
 				content:html,
@@ -219,14 +228,14 @@
 					productResult = result.result;
 					},
 					error : function(result) {
-						Layer.alert('商品id查詢錯誤');
+						layer.alert('商品id查詢錯誤');
 						}
 				});
 			productResult = JSON.parse(productResult);
 			return productResult;
 			}
 
-		function getUserAddredd(id) {
+		function getUserAddress(id) {
 			var address = "";
 			var user = {};
 			user.id = id;
@@ -313,9 +322,9 @@
 						'<td>'+evaluations[i].content+'</td>'+
 						'</tr>';
 				}
-			evatuationTable.innerHTML += html;
+			evaluationTable.innerHTML += html;
 
-			if("${currentUser}"!=="" && getUserOrder() === "true") {
+			if("${currentUser}" !== "" && getUserProductRecord() === "true") {
 				var inputArea = document.getElementById("inputArea");
 				html= '<div class="col-sm-12 col-md-12 col-lg-12">' +
 						'<textarea class="form-control" rows="4" id="evaluationText"></textarea>' +
@@ -356,14 +365,14 @@
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : '${cp}/getShoppingEvaluations',
+				url : '${cp}/getShoppingEvaluation',
 				data : product,
 				dataType : 'json',
 				success : function(result) {
 					evaluations = result.result;
 					},
 				error : function(result) {
-					layer.alert('evaluations查詢錯誤');
+					layer.alert('evaluation查詢錯誤');
 					}
 				});
 			evaluations = eval("("+evaluations+")");

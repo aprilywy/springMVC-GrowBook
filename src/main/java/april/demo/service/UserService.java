@@ -7,15 +7,15 @@ import april.demo.entity.User;
 
 public interface UserService {
 
-	User getUser(int id);
+	public User getUser(int id);
 	
-	User getUser(String nameOrEmail);
+	public User getUser(String usernameOrEmail);
 	
-	void addUser(User user);
+	public void addUser(User user);
 	
-	Response deleteUser(int id);
+	public Response deleteUser(int id);
 	
-	boolean updateUser(User user);
+	public boolean updateUser(User user);
 	
-	List<User> getAllUser();
+	public List<User> getAllUser();
 }

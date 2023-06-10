@@ -11,7 +11,8 @@
 <meta http-equiv="X-VA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>萌芽書屋訂購列表</title>
-<link rel="stylesheet" type="text/css" href="${cp}/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${cp}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${cp}/css/style.css" />
 <script type="text/javascript" src="${cp}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${cp}/js/bootstrap.min.js"></script>
@@ -98,7 +99,7 @@
 			var receiveCounts = parseInt(receiveCount.innerHTML);
 			var allCounts = parseInt(allCount.innerHTML);
 
-			var allOrders = getAllOrders();
+			var allOrders = getOrders();
 			unHandleTable.innerHTML = "";
 			transportTable.innerHTML = "";
 			receiveTable.innerHTML = "";
@@ -120,14 +121,14 @@
 
 			for (var i = 0; i < allOrders.length; i++) {
 				var product = getProductById(allOrders[i].productId);
-				allHTMLTemp += '<tr>' + '<td>' + prodcut.name + '</td>'
+				allHTMLTemp += '<tr>' + '<td>' + product.name + '</td>'
 						+ '<td>' + allOrders[i].counts + '</td>' + '<td>'
 						+ allOrders[i].productPrice + '</td>' + '<td>'
 						+ orderArray[allOrders[i].orderStatus] + '</td>'
 						+ '</tr>';
 				allCounts++;
 				if (allOrders[i].orderStatus == 0) {
-					unHandleHTMLTemp += '<tr>' + '<td>' + prodcut.name
+					unHandleHTMLTemp += '<tr>' + '<td>' + product.name
 							+ '</td>' + '<td>' + allOrders[i].counts + '</td>'
 							+ '<td>' + allOrders[i].productPrice + '</td>'
 							+ '<td>' + orderArray[allOrders[i].orderStatus]
@@ -137,7 +138,7 @@
 					var address = getUserAddress(allOrders[i].userId);
 					var phoneNumber = getUserPhoneNumber(allOrders[i].userId)
 					transportHTMLTemp += '<tr>' + '<td>'
-							+ prodcut.name
+							+ product.name
 							+ '</td>'
 							+ '<td>'
 							+ allOrders[i].counts
@@ -164,7 +165,7 @@
 				} else if (allOrders[i].orderStatus == 2) {
 					receiveHTMLTemp += '<tr>'
 							+ '<td>'
-							+ prodcut.name
+							+ product.name
 							+ '</td>'
 							+ '<td>'
 							+ allOrders[i].counts
@@ -216,7 +217,7 @@
 			}
 
 			unHandleCount.innerHTML = unHandleCounts;
-			transportCount.innerHTML = transportCOunts;
+			transportCount.innerHTML = transportCounts;
 			receiveCount.innerHTML = receiveCounts;
 			allCount.innerHTML = allCounts;
 
@@ -231,11 +232,7 @@
 			judgeIsLogin();
 			var orderProducts = "";
 			var user = {};
-			user.userId = $
-			{
-				currentUser.id
-			}
-			;
+			user.userId = ${currentUser.id};
 			$.ajax({
 				async : false,
 				type : 'POST',

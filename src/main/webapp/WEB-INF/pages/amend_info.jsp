@@ -70,10 +70,10 @@
 				<div class="form-group">
 					<label for="gender" class="col-sm-2 col-md-2 ocntrol-lebal">性別</label>
 					<div class="col-sm-6 col-md-6">
-						<label class="radio-inline"> <input type="radio" id="man"
-							value="option1">男
-						</label> <label class="radio-inline"> <input type="radio" id="man"
-							value="option2">女
+						<label class="radio-inline"> <input type="radio" name="gender" id="man"
+							value="man">男
+						</label> <label class="radio-inline"> <input type="radio" name="gender" id="woman"
+							value="woman">女
 						</label>
 					</div>
 				</div>
@@ -115,11 +115,7 @@
 	<script type="text/javascript">
 		initData();
 		function initData() {
-			var userId = $
-			{
-				currentUser.Id
-			}
-			;
+			var userId = ${currentUser.id};
 			var user = getUserById(userId);
 			var userDetail = getUserDetailById(userId);
 			document.getElementById("inputUsername").value = user.username;
@@ -133,7 +129,7 @@
 			if (userDetail.gender == 0) {
 				document.getElementById("man").checked = true;
 			} else {
-				document.getElementById("women").checked = true;
+				document.getElementById("woman").checked = true;
 			}
 		}
 
@@ -146,12 +142,14 @@
 			user.password = document.getElementById("inputPassword").value;
 			user.phoneNumber = document.getElementById("inputPhoneNumber").value;
 			user.birthday = document.getElementById("inputBirthday").value;
-			user.postNumber = document.getElementById("inputpostcodes").value;
+			user.postNumber = document.getElementById("inputPostcodes").value;
 			user.address = document.getElementById("inputAddress").value;
 			user.gender = 0;
-			if (document.getElementById("women").checked) {
+			if (document.getElementById("woman").checked) {
 				user.gender = 1;
-			}
+			} else {
+				user.gender =0;
+				}
 			if (user.username == '') {
 				layer.msg('用戶名稱不能為空', {
 					icon : 2

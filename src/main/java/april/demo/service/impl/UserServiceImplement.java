@@ -40,8 +40,8 @@ public class UserServiceImplement implements UserService {
 	}
 
 	@Override
-	public User getUser(String nameOrEmail) {
-		return userDao.getUser(nameOrEmail);
+	public User getUser(String usernameOrEmail) {
+		return userDao.getUser(usernameOrEmail);
 	}
 
 	@Override

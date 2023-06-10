@@ -59,11 +59,11 @@ public class UserController {
 
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> doLogin(String userNameOrEmail, String password, HttpSession httpSession) {
-		System.out.println("我接收到了登入請求" + userNameOrEmail + " " + password);
+	public Map<String, Object> doLogin(String usernameOrEmail, String password, HttpSession httpSession) {
+		System.out.println("我接收到了登入請求" + usernameOrEmail + " " + password);
 		String result = "fail";
 		
-		User user = userService.getUser(userNameOrEmail);
+		User user = userService.getUser(usernameOrEmail);
 		if (user == null) {
 			result = "unexist";
 		} else {
@@ -83,13 +83,13 @@ public class UserController {
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> doRegister(String username, String email, String nickName, String password,
-			String phoneNumber, Integer gender, String birthday, String postNumber, String address) {
+			String phoneNumber, int gender, String birthday, String postNumber, String address) {
 
 		String result = "fail";
 		
 		User user = userService.getUser(username);
 		if (user != null) {
-			result = "nameExist";
+			result = "usernameExist";
 		} else {
 			user = userService.getUser(email);
 			
@@ -131,7 +131,7 @@ public class UserController {
 	@RequestMapping(value = "/doUpdate", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> doUpdate(String username, String email, String nickName, String password,
-			String phoneNumber, Integer gender, String birthday, String postNumber, String address) {
+			String phoneNumber, int gender, String birthday, String postNumber, String address) {
 		String result = "fail";
 		
 		User user = userService.getUser(username);
@@ -171,7 +171,7 @@ public class UserController {
 
 	@RequestMapping(value = "/getUserById", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getUserById(Integer id) {
+	public Map<String, Object> getUserById(int id) {
 		User user = userService.getUser(id);
 		Gson gson = new Gson();
 		String result = gson.toJson(user);
@@ -183,7 +183,7 @@ public class UserController {
 
 	@RequestMapping(value = "/getUserDetailById", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getUserDetailById(Integer id) {
+	public Map<String, Object> getUserDetailById(int id) {
 		UserDetail userDetail = userDetailService.getUserDetail(id);
 		Gson gson = new Gson();
 		String result = gson.toJson(userDetail);
@@ -195,7 +195,7 @@ public class UserController {
 
 	@RequestMapping(value = "getUserAddressAndPhoneNumber", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> getUserAddressAndPhoneNumber(Integer id) {
+	public Map<String, Object> getUserAddressAndPhoneNumber(int id) {
 		String address = userDetailService.getUserDetail(id).getAddress();
 		String phoneNumber = userDetailService.getUserDetail(id).getPhoneNumber();
 
@@ -207,13 +207,14 @@ public class UserController {
 
 	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
 	@ResponseBody
-	public Response deleteUser(Integer id) {
+	public Response deleteUser(int id) {
 		return userService.deleteUser(id);
 	}
 
 	@RequestMapping(value = "/doLogout")
 	public String doLogout(HttpSession httpSession) {
-		httpSession.setAttribute("currentUser", " ");
+		httpSession.removeAttribute("currentUser");
+		httpSession.invalidate(); // 設置 httpSession 失效
 		return "redirect:login";
 	}
 

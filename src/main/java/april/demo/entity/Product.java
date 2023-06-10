@@ -21,8 +21,8 @@ public class Product {
 	@Column(name = "`name`")
 	private String name;
 	
-	@Column(name = "auther")
-	private String auther;
+	@Column(name = "author")
+	private String author;
 	
 	@Column(name = "description")
 	private String description;
@@ -43,12 +43,12 @@ public class Product {
 		super();
 	}
 
-	public Product(Integer id, String name, String auther, String description, String keyWord, Integer price,
+	public Product(Integer id, String name, String author, String description, String keyWord, Integer price,
 			Integer counts, Integer type) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.auther = auther;
+		this.author = author;
 		this.description = description;
 		this.keyWord = keyWord;
 		this.price = price;
@@ -72,12 +72,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getAuther() {
-		return auther;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setAuther(String auther) {
-		this.auther = auther;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public String getDescription() {

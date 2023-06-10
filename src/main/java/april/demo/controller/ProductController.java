@@ -29,6 +29,11 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@RequestMapping(value = "/product")
+	public String product() {
+		return "product";
+	}
+	
 	@RequestMapping(value = "/getAllProducts")
 	@ResponseBody
 	public Map<String, Object> getAllProducts() {
@@ -49,12 +54,12 @@ public class ProductController {
 	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addProduct(String name, String auther, String description, String keyWord, int price, int counts, int type) {
+	public Map<String, Object> addProduct(String name, String author, String description, String keyWord, int price, int counts, int type) {
 		System.out.println("添加了商品：" + name);
 		String result = "fail";
 		Product product = new Product();
 		product.setName(name);
-		product.setAuther(auther);
+		product.setAuthor(author);
 		product.setDescription(description);
 		product.setKeyWord(keyWord);
 		product.setPrice(price);
@@ -78,11 +83,6 @@ public class ProductController {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("result", "success");
 		return resultMap;
-	}
-	
-	@RequestMapping(value = "/product")
-	public String product() {
-		return "product";
 	}
 	
 	@RequestMapping(value = "/getProductById", method = RequestMethod.POST)

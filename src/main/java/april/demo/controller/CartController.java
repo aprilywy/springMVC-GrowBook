@@ -53,7 +53,7 @@ public class CartController {
 		return resultMap;
 	}
 	
-	@RequestMapping(value = "/getCurts", method = RequestMethod.POST)
+	@RequestMapping(value = "/getCarts", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> getCarts(int userId) {
 		List<Cart> cartList = cartService.getCarts(userId);
