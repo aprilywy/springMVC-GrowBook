@@ -60,7 +60,7 @@ public class UserServiceImplement implements UserService {
 			userDao.deleteUser(id);
 			return new Response(1, "刪除成功", null);
 		} catch (Exception e) {
-			return new Response(0, "刪除失敗", null);
+			return new Response(0, "刪除失敗，此用戶存有購買記錄、評價紀錄或購物車紀錄", null);
 		}
 	}
 

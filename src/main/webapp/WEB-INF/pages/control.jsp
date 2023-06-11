@@ -73,6 +73,13 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="productName" class="col-sm-2 col-md-2 control-label">作者</label>
+								<div class="col-sm-6 col-md-6">
+									<input type="text" class="form-control" id="author"
+										placeholder="台灣製造"></input>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="productDescribe"
 									class="col-sm-2 col-md-2 control-label">商品描述</label>
 								<div class="col-sm-6 col-md-6">
@@ -158,24 +165,16 @@
 					+ '<th> 用戶名稱 </th>' + '<th> 用戶暱稱 </th>'
 					+ '<th> Email </th>' + '<th> 是否刪除 </th>' + '</tr>';
 			var html = "";
-			for (var i = 0; allUser.length; i++) {
-				html += '<tr>'
-						+ '<td>'
-						+ allUser[i].id
-						+ '</td>'
-						+ '<td>'
-						+ allUser[i].username
-						+ '</td>'
-						+ '<td>'
-						+ allUser[i].nickName
-						+ '</td>'
-						+ '<td>'
-						+ allUser[i].email
-						+ '</td>'
-						+ '<td>'
-						+ '<button class="btn btn-primary btn-sm" type="submit" onclick="deleteUser('
-						+ allUser[i].id
-				')">刪除</button>' + '</td>' + '</tr>';
+			for (var i = 0; i < allUser.length; i++) {
+				html += '<tr>'+
+						'<td>'+allUser[i].id+'</td>'+
+						'<td>'+allUser[i].username+'</td>'+
+						'<td>'+allUser[i].nickName+'</td>'+
+						'<td>'+allUser[i].email+'</td>'+
+						'<td>'+
+						'<button class="btn btn-primary btn-sm" type="submit" onclick="deleteUser('+allUser[i].id+')">刪除</button>'+
+						'</td>'+
+						'</tr>';
 			}
 			userTable.innerHTML += html;
 		}
@@ -190,45 +189,41 @@
 				data : nothing,
 				dataType : 'json',
 				success : function(result) {
-					if (result != null) {
+					if (result!=null) {
 						allUsers = result.allUsers;
 					} else {
-						leyer.alert('查詢所有用戶錯誤');
+						layer.alert('查詢所有用戶錯誤');
 					}
 				},
 				error : function(result) {
 					layer.alert('查詢所有用戶error');
 				}
 			});
-			allUsers = eval("(" + allUsers + ")");
+			allUsers = eval("("+allUsers+")");
 			return allUsers;
 		}
 
 		function listAllProduct() {
 			var productArea = document.getElementById("productArea");
-			var allProduct = getAllProduct();
+			var allProduct = getAllProducts();
 			var html = "";
 			productArea.innerHTML = '';
 			for (var i = 0; i < allProduct.length; i++) {
 				var imgURL = "${cp}/img/p" + allProduct[i].id + ".jpg";
-				html += '<div class="col-sm-4 col-md-4 pd-5">'
-						+ '<div class="boxes">'
-						+ '<div class="big bigimg">'
-						+ '<img src="'+imgURL'">'
-						+ '</div>'
-						+ '<p class="font-styles center">'
-						+ allProduct[i].name
-						+ '</p>'
-						+ '<p class="pull-right">價格：'
-						+ allProduct[i].price
-						+ '</p>'
-						+ '<p class="pull-left">庫存：'
-						+ allProduct[i].counts
-						+ '</p>'
-						+ '<div class = "row">'
-						+ '<button class="btn btn-primary delete-button" type="submit" onclick="deleteProduct('
-						+ allProduct[i].id + ')">刪除商品</button>' + '</div>'
-						+ '</div>' + '</div>';
+				html += '<div class="col-sm-4 col-md-4 pd-5">'+
+						'<div class="boxes">'+
+						'<div class="big bigimg">'+
+						'<img src="'+imgURL+'">'+
+						'</div>'+
+						'<p class="font-styles center">'+allProduct[i].name+'</p>'+
+						'<p class="font-styles center">'+allProduct[i].author+'</p>'+
+						'<p class="pull-right">價格：'+allProduct[i].price+'</p>'+
+						'<p class="pull-left">庫存：'+allProduct[i].counts+'</p>'+
+						'<div class = "row">'+
+						'<button class="btn btn-primary delete-button" type="submit" onclick="deleteProduct('+allProduct[i].id+')">刪除商品</button>'+
+						'</div>'+
+						'</div>'+
+						'</div>';
 			}
 			productArea.innerHTML += html;
 		}
@@ -287,10 +282,10 @@
 				async : false,
 				type : 'POST',
 				url : '${cp}/deleteProduct',
-				data : prodcut,
+				data : product,
 				dataType : 'json',
 				success : function(result) {
-					deletePedult = result;
+					deleteResult = result;
 				},
 				error : function(result) {
 					layer.alert('刪除商品錯誤');
@@ -303,12 +298,13 @@
 		function addProduct() {
 			var loadings = layer.load(0);
 			var product = {};
-			product.name = document.getElementById("prodcutName").value;
-			product.description = document.getElementById("prodcutDescribe").value;
+			product.name = document.getElementById("productName").value;
+			product.author = document.getElementById("author").value;
+			product.description = document.getElementById("productDescribe").value;
 			product.keyWord = document.getElementById("keyWord").value;
-			product.price = document.getElementById("prodcutPrice").value;
-			product.counts = document.getElementById("prodcutCount").value;
-			product.type = document.getElementById("prodcuttype").value;
+			product.price = document.getElementById("productPrice").value;
+			product.counts = document.getElementById("productCount").value;
+			product.type = document.getElementById("productType").value;
 			var addResult = "";
 			$.ajax({
 				async : false,
@@ -338,7 +334,7 @@
 			var results = "";
 			var name = document.getElementById("productName").value;
 			$.ajaxFileUpload({
-				url : '${cp}/uploadFile?name=' + name,
+				url : '${cp}/uploadFile?name='+name,
 				secureuri : false,
 				fileElementId : 'productImgUpload',
 				type : 'POST',
@@ -350,7 +346,7 @@
 					result = result.replace("</PRE>", '');
 					result = result.replace("<pre>", '');
 					result = result.replace("</pre>", '');
-					result = JSON.prase(result);
+					result = JSON.parse(result);
 					result = result.result;
 					if (results == "success") {
 						layer.msg("圖片上傳成功", {

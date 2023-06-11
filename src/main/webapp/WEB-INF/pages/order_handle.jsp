@@ -143,8 +143,8 @@
 				var user = getUserById(allOrders[i].userId);
 				var product = getProductById(allOrders[i].productId);
 				allHTMLTemp += '<tr>' +
-						'<td>'+user.name+'</td>' +
-						'<td>'+prodcut.name+'</td>' +
+						'<td>'+user.username+'</td>' +
+						'<td>'+product.name+'</td>' +
 						'<td>'+allOrders[i].counts+'</td>' +
 						'<td>'+allOrders[i].productPrice+'</td>' +
 						'<td>'+orderArray[allOrders[i].orderStatus]+'</td>' +
@@ -152,13 +152,13 @@
 				allCounts++;
 				if(allOrders[i].orderStatus == 0) {
 					unHandleHTMLTemp += '<tr>'+
-							'<td>'+user.name+'</td>'+
-							'<td>'+prodcut.name+'</td>'+
+							'<td>'+user.username+'</td>'+
+							'<td>'+product.name+'</td>'+
 							'<td>'+allOrders[i].counts+'</td>'+
 							'<td>'+allOrders[i].productPrice+'</td>'+
 							'<td>'+orderArray[allOrders[i].orderStatus]+'</td>'+
 							'<td>'+
-							'<button class="btn btn=primary btn-sm" onclick="sendProducts('+allOrders[i].userId+','+allOrders[i].productId+'.\''+allOrders[i].time+'\')">出貨</button>'+
+							'<button class="btn btn=primary btn-sm" onclick="sendProducts('+allOrders[i].userId+','+allOrders[i].productId+',\''+allOrders[i].time+'\')">出貨</button>'+
 							'</td>'+
 							'</tr>';
 					unHandleCounts++;
@@ -166,8 +166,8 @@
 						var address = getUserAddress(allOrders[i].userId);
 						var phoneNumber = getUserPhoneNumber(allOrders[i].userId)
 						transportHTMLTemp += '<tr>'+
-								'<td>'+user.name+'</td>'+
-								'<td>'+prodcut.name+'</td>'+
+								'<td>'+user.username+'</td>'+
+								'<td>'+product.name+'</td>'+
 								'<td>'+allOrders[i].counts+'</td>'+
 								'<td>'+allOrders[i].productPrice+'</td>'+
 								'<td>'+address+'</td>'+
@@ -177,8 +177,8 @@
 						transportCounts++;
 					} else if(allOrders[i].orderStatus == 2) {
 						receiveHTMLTemp += '<tr>'+
-								'<td>'+user.name+'</td>'+
-								'<td>'+prodcut.name+'</td>'+
+								'<td>'+user.username+'</td>'+
+								'<td>'+product.name+'</td>'+
 								'<td>'+allOrders[i].counts+'</td>'+
 								'<td>'+allOrders[i].productPrice+'</td>'+
 								'<td>'+orderArray[allOrders[i].orderStatus]+'</td>'+
@@ -228,7 +228,7 @@
 				}
 	
 				unHandleCount.innerHTML = unHandleCounts;
-				transportCount.innerHTML = transportCOunts;
+				transportCount.innerHTML = transportCounts;
 				receiveCount.innerHTML = receiveCounts;
 				allCount.innerHTML = allCounts;
 	
@@ -256,7 +256,7 @@
 					layer.alert('取得全部訂單錯誤');
 					}
 				});
-				orderProducts = eval("("+orderProducts")");
+				orderProducts = eval("("+orderProducts+")");
 				return orderProducts;
 			}
 	
@@ -336,10 +336,10 @@
 					phoneNumber = result.phoneNumber;
 					},
 				error : function(result) {
-					layer.alert('地址查詢錯誤');
+					layer.alert('電話查詢錯誤');
 					}
 				});
-				return address;
+				return phoneNumber;
 			}
 	
 		function judgeIsLogin() {

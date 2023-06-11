@@ -11,9 +11,9 @@ public interface ProductService {
 	
 	public Product getProduct(String name);
 	
-	public void addProduct(Product product);
+	public Response addProduct(Product product);
 	
-	Response deleteProduct(int id);
+	public Response deleteProduct(int id);
 	
 	public boolean updateProduct(Product product);
 	

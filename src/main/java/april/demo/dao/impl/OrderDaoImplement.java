@@ -43,7 +43,7 @@ public class OrderDaoImplement implements OrderDao {
 	@Override
 	public boolean updateOrder(Order order) {
 		String hql = "update Order set orderStatus = :orderStatus where userId = :userId and productId = productId and time = :time";
-		String sql = "update orders set order_status="+order.getOrderStatus()+" where user_id="+order.getUserId()+" and product_id"+order.getProductId()+" and time='"+order.getTime()+"'";
+		String sql = "update Order set order_status="+order.getOrderStatus()+" where user_id="+order.getUserId()+" and product_id="+order.getProductId()+" and time='"+order.getTime()+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(sql);
 		return query.executeUpdate() > 0;
 	}

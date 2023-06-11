@@ -340,8 +340,8 @@
 		function getUserProductRecord() {
 			var result = "";
 			var product = {};
-			product.userId = ${currentUser.id};
-			product.productId = ${productDetail.id};
+			product.userId = "${currentUser.id}";
+			product.productId = "${productDetail.id}";
 			$.ajax({
 				async : false,
 				type : 'POST',

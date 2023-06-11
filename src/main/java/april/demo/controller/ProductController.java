@@ -102,9 +102,9 @@ public class ProductController {
 		String result = "fail";
 		try {
 			if (productImgUpload != null && !productImgUpload.isEmpty()) {
-				String fileRealPath = request.getSession().getServletContext().getRealPath("/static/img");
+				String fileRealPath = request.getSession().getServletContext().getRealPath("/static/img/p");
 				int id = productService.getProduct(name).getId();
-				String fileName = String.valueOf(id) + ",jpg";
+				String fileName = String.valueOf(id) + ".jpg";
 				File fileFolder = new File(fileRealPath);
 				System.out.println("fileRealPath = " + fileRealPath + "/" + fileName);
 				if (!fileFolder.exists()) {

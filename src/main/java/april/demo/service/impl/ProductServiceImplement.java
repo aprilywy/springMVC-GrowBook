@@ -41,8 +41,13 @@ public class ProductServiceImplement implements ProductService {
 	}
 
 	@Override
-	public void addProduct(Product product) {
-		productDao.addProduct(product);
+	public Response addProduct(Product product) {
+		try {
+			productDao.addProduct(product);
+			return new Response(1, "添加商品成功", null);
+		} catch (Exception e) {
+			return new Response(0, "添加商品失敗，已有重複商品", null);
+		}
 	}
 
 	@Override
@@ -55,7 +60,7 @@ public class ProductServiceImplement implements ProductService {
 			productDao.deleteProduct(id);
 			return new Response(1, "刪除商品成功", null);
 		} catch (Exception e) {
-			return new Response(1, "刪除商品成功", null);
+			return new Response(0, "刪除商品失敗", null);
 		}
 	}
 

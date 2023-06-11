@@ -52,7 +52,7 @@
 				</c:if>
 				<c:if test="${not empty currentUser}">
 					<c:if test="${currentUser.role ==1}">
-						<li class="nav-item"><a class="p-2" href="${cp}control"
+						<li class="nav-item"><a class="p-2" href="${cp}/control"
 							method="post">控制台</a></li>
 					</c:if>
 					<li class="nav-item"><a class="p-2" href="${cp}/cart">購物車</a>
@@ -61,7 +61,7 @@
 					</li>
 					<c:if test="${currentUser.role == 1}">
 						<li class="nav-item"><a class="p-2"
-							href="${cp}/shopping_handle">處理訂單</a>
+							href="${cp}/order_handle">處理訂單</a>
 					</c:if>
 					<li role="separator" class="divider"></li>
 					<li class="nav-item"><a class="p-2" href="${cp}/amend_info">會員資料修改</a>
