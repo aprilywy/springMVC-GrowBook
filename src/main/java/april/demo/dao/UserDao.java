@@ -12,9 +12,9 @@ public interface UserDao {
 	
 	void addUser(User user);
 	
-	boolean deleteUser(int id);
+	public boolean deleteUser(int id);
 	
-	boolean updateUser(User user);
+	public boolean updateUser(User user);
 	
 	List<User> getAllUser();
 }

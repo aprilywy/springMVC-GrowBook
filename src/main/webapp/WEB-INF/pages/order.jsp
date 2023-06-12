@@ -137,49 +137,28 @@
 				} else if (allOrders[i].orderStatus == 1) {
 					var address = getUserAddress(allOrders[i].userId);
 					var phoneNumber = getUserPhoneNumber(allOrders[i].userId)
-					transportHTMLTemp += '<tr>' + '<td>'
-							+ product.name
-							+ '</td>'
-							+ '<td>'
-							+ allOrders[i].counts
-							+ '</td>'
-							+ '<td>'
-							+ allOrders[i].productPrice
-							+ '</td>'
-							+ '<td>'
-							+ address
-							+ '</td>'
-							+ '<td>'
-							+ phoneNumber
-							+ '</td>'
-							+ '<td>'
-							+ orderArray[allOrders[i].orderStatus]
-							+ '</td>'
-							+ '<td>'
-							+ '<button class="btn btn=primary btn-sm" onclick="receiveProducts('
-							+ allOrders[i].userId + ','
-							+ allOrders[i].productId + '.\''
-							+ allOrders[i].time + '\')">確認收貨</button>'
-							+ '</td>' + '</tr>';
+					transportHTMLTemp += '<tr>'+
+							'<td>'+product.name+'</td>'+
+							'<td>'+allOrders[i].counts+'</td>'+
+							'<td>'+allOrders[i].productPrice+'</td>'+
+							'<td>'+address+'</td>'+
+							'<td>'+phoneNumber+'</td>'+
+							'<td>'+orderArray[allOrders[i].orderStatus]+'</td>'+
+							'<td>'+
+							'<button class="btn btn-primary btn-sm" onclick="receiveProducts('+allOrders[i].userId+','+allOrders[i].productId+',\''+allOrders[i].time+'\')">確認收貨</button>'+
+							'</td>'+
+							'</tr>';
 					transportCounts++;
 				} else if (allOrders[i].orderStatus == 2) {
-					receiveHTMLTemp += '<tr>'
-							+ '<td>'
-							+ product.name
-							+ '</td>'
-							+ '<td>'
-							+ allOrders[i].counts
-							+ '</td>'
-							+ '<td>'
-							+ allOrders[i].productPrice
-							+ '</td>'
-							+ '<td>'
-							+ orderArray[allOrders[i].orderStatus]
-							+ '</td>'
-							+ '<td>'
-							+ '<button class="btn btn=primary btn-sm" onclick="productDetail('
-							+ allOrders[i].productId + ')">評價</button>'
-							+ '</td>' + '</tr>';
+					receiveHTMLTemp +='<tr>'+
+							'<td>'+product.name+'</td>'+
+							'<td>'+allOrders[i].counts+'</td>'+
+							'<td>'+allOrders[i].productPrice+'</td>'+
+							'<td>'+orderArray[allOrders[i].orderStatus]+'</td>'+
+							'<td>'+
+							'<button class="btn btn-primary btn-sm" onclick="productDetail('+allOrders[i].productId+')">評價</button>'+
+							'</td>'+
+							'</tr>';
 					receiveCounts++;
 				}
 			}
@@ -246,7 +225,7 @@
 					layer.alert('訂單查詢錯誤')
 				}
 			});
-			orderProducts = eval("(" + orderProducts + ")");
+			orderProducts = eval("("+orderProducts+")");
 			return orderProducts;
 		}
 
@@ -350,7 +329,7 @@
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : '${cp}/product',
+				url : '${cp}/productDetail',
 				data : product,
 				dataType : 'json',
 				success : function(result) {

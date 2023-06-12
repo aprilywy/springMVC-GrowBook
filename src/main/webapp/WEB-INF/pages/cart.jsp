@@ -151,8 +151,8 @@
 			}
 
 		function buyConfirm(productsId, productsCounts) {
-			var address = getUserAddress(${currentUser.id});
-			var phoneNumber = getUserPhoneNumber(${currentUser.id});
+			var address = getUserAddress('${currentUser.id}');
+			var phoneNumber = getUserPhoneNumber('${currentUser.id}');
 			var totalPrice = 0;
 
 			var html = '<div class="col-sm-1 col-md-1 col-lg-1"></div>'+
@@ -246,7 +246,7 @@
 				}
 			layer.confirm('前往訂單狀態？', {icon:1, title:'購買成功',btn:['前往訂單','繼續購買']},
 					function(){
-						window.location.href = "{cp}/order";
+						window.location.href = "${cp}/order";
 					},
 					function(index){
 						window.location.href = "${cp}/cart";
@@ -257,14 +257,14 @@
 		function addToOrders(productId, productCounts) {
 			judgeIsLogin();
 			var order = {};
-			order.userId = ${currentUser.id};
+			order.userId = '${currentUser.id}';
 			order.productId = productId;
 			order.counts = productCounts;
 			var buyResult = "";
 			$.ajax({
 				async : false,
 				type : 'POST',
-				url : '${cp}/addCart',
+				url : '${cp}/addOrder',
 				data : order,
 				dataType : 'json',
 				success : function(result) {

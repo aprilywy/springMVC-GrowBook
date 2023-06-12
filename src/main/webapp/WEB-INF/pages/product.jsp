@@ -40,7 +40,7 @@
 		<div class="row">
 			<div class="col-sm-1 col-md-1"></div>
 			<div class="col-sm-5 col-md-5">
-				<img class="detail-img" src="${cp}/img/p${productDetail.id}.jpg">
+				<img class="detail-img" src="${cp}/img/${productDetail.id}.jpg">
 			</div>
 			<div class="col-sm-5 col-md-5 detail-x">
 				<table class="table table-striped">
@@ -59,10 +59,6 @@
 					<tr>
 						<th>商品描述</th>
 						<th>${productDetail.description}</th>
-					</tr>
-					<tr>
-						<th>商品類別</th>
-						<th>${productDetail.type}</th>
 					</tr>
 					<tr>
 						<th>商品庫存</th>

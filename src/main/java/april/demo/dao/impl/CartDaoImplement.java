@@ -62,7 +62,7 @@ public class CartDaoImplement implements CartDao {
 	public boolean deleteCartByUser(int userId) {
 		String hql = "delete Cart where userId = :userId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter(0, userId);
+		query.setParameter("userId", userId);
 		return query.executeUpdate() > 0;
 	}
 

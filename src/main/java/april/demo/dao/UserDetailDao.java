@@ -10,9 +10,9 @@ public interface UserDetailDao {
 	
 	void addUserDetail(UserDetail userDetail);
 	
-	boolean deleteUserDetail(int id);
+	public boolean deleteUserDetail(int id);
 	
-	boolean updateUserDetail(UserDetail userDetail);
+	public boolean updateUserDetail(UserDetail userDetail);
 	
-	List<UserDetail> getAllUserDetail();
+	public List<UserDetail> getAllUserDetail();
 }

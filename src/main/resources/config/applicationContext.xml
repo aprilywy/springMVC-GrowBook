@@ -57,5 +57,11 @@
 				rollback-for="Exception" />
 		</tx:attributes>
 	</tx:advice>
+	
+		<!-- 配置文件上傳解析器，將上傳的文件封裝為 MultipartFile -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name ="maxUploadSize" value ="100000" />
+	</bean>
 
 </beans>

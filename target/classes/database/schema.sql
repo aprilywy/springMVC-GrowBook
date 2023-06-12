@@ -36,7 +36,7 @@ create table if not exists user_detail(
 create table if not exists products(
 	id int(30) not null,
 	name varchar(50) not null,
-	author varchar(20) not null,
+	author varchar(100) not null,
 	description varchar(1000) not null,
 	key_word varchar(1000) not null,
 	price int not null,

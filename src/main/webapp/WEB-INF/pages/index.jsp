@@ -10,7 +10,8 @@
 <meta http-equiv="X-VA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>萌芽書屋</title>
-<link rel="stylesheet" type="text/css" href="${cp}/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${cp}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${cp}/css/style.css" />
 
 <script type="text/javascript" src="${cp}/js/jquery.min.js"></script>
@@ -75,7 +76,7 @@
 
 			for (var i = 0; i < allProduct.length; i++) {
 				var html = "";
-				var imgURL = "${cp}/img/p" + allProduct[i].id + ".jpg";
+				var imgURL = "${cp}/img/" + allProduct[i].id + ".jpg";
 				html += '<div class="col-sm-4 col-md-4" >'
 						+ '<div class="boxes pointer" onclick="productDetail('
 						+ allProduct[i].id + ')">' + '<div class="big bigimg">'

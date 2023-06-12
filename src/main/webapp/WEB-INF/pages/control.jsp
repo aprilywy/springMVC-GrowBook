@@ -121,19 +121,13 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="productImgUpLoad"
-									class="col-sm-2 col-md-2 control-label" accept="image/jpg">商品圖片</label>
-								<div class="col-sm-6 col-md-6">
-									<input name="productImgUpload" type="file"
-										id="productImgUpload" />
-									<p class="help-block">上傳的圖片大小應為280*160大小</p>
+							<form class="form-group" enctype="multipart/form-data">
+                                <label for="productImgUpload" class="col-sm-2 col-md-2 control-label" accept="img/jpg">商品圖片</label>
+                                <div class="col-sm-6 col-md-6">
+                                    <input name="productImgUpload" type="file" id="productImgUpload"/>
+                                    <p class="help-block">上傳的圖片大小應為300*400大小</p>
 								</div>
-								<%--<button class="btn btn-primary col-sm-2 col-md-2" onclick="fileUpload()">上傳圖片</button> --%>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-6" id="imgPreSee"></div>
-							</div>
+							</form>
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-6">
 									<button type="submit" class="btn btn-lg btn-primary btn-block"
@@ -209,7 +203,7 @@
 			var html = "";
 			productArea.innerHTML = '';
 			for (var i = 0; i < allProduct.length; i++) {
-				var imgURL = "${cp}/img/p" + allProduct[i].id + ".jpg";
+				var imgURL = "${cp}/img/" + allProduct[i].id + ".jpg";
 				html += '<div class="col-sm-4 col-md-4 pd-5">'+
 						'<div class="boxes">'+
 						'<div class="big bigimg">'+
@@ -254,25 +248,25 @@
 		}
 
 		function deleteUser(id) {
-			var user = {};
-			user.id = id;
-			var deleteResult = "";
-			$.ajax({
-				async : false,
-				type : 'POST',
-				url : '${cp}/deleteUser',
-				data : user,
-				dataType : 'json',
-				success : function(result) {
-					deleteResult = result;
-				},
-				error : function(result) {
-					layer.alert('刪除用戶錯誤');
-				}
-			});
-			layer.msg(deleteResult.message);
-			listAllUser();
-		}
+	         var user = {};
+	         user.id = id;
+	         var deleteResult = "";
+	         $.ajax({
+	             async : false,
+	             type : 'POST',
+	             url : '${cp}/deleteUser',
+	             data : user,
+	             dataType : 'json',
+	             success : function(result) {
+	                 deleteResult = result;
+	             },
+	             error : function(result) {
+	                 layer.alert('刪除用戶錯誤');
+	             }
+	         });
+	         layer.msg(deleteResult.message);
+	         listAllUser();
+	     }
 
 		function deleteProduct(id) {
 			var product = {};
@@ -331,41 +325,37 @@
 		}
 
 		function fileUpload() {
-			var results = "";
-			var name = document.getElementById("productName").value;
-			$.ajaxFileUpload({
-				url : '${cp}/uploadFile?name='+name,
-				secureuri : false,
-				fileElementId : 'productImgUpload',
-				type : 'POST',
-				dataType : 'text',
-				success : function(result) {
-					result = result.replace(/<pre.*?>/g, '');
-					result = result.replace(/<PRE.*?>/g, '');
-					result = result.replace("<PRE>", '');
-					result = result.replace("</PRE>", '');
-					result = result.replace("<pre>", '');
-					result = result.replace("</pre>", '');
-					result = JSON.parse(result);
-					result = result.result;
-					if (results == "success") {
-						layer.msg("圖片上傳成功", {
-							icon : 1
-						});
-						window.location.href = "${cp}/control";
-						//var imgPreSee = document.getElementById("imgPreSee");
-						//var imgSrc = '${cp}/img/'+name+'.jpg';
-						//imgPreSee.innerHTML +='<img src="'+imgSrc+')" class="col-sm-12 col-md-12 col-lg-12"/>';
-					} else {
-						layer.msg("圖片上傳失敗", {
-							icon : 0
-						});
-					}
-				},
-				error : function() {
-					layer.alert("圖片上傳錯誤");
-				}
-			});
+	          var results = "";
+	          var name = document.getElementById("productName").value;
+	          $.ajax({
+	              url:'${cp}/uploadFile?name='+name,
+	              secureuri:false ,
+	              fileElementId:'productImgUpload',
+	              type:'POST',
+	              dataType : 'text',
+	              success: function (result){
+	                  result = result.replace(/<pre.*?>/g, '');
+	                  result = result.replace(/<PRE.*?>/g, '');
+	                  result = result.replace("<PRE>", '');
+	                  result = result.replace("</PRE>", '');
+	                  result = result.replace("<pre>", '');
+	                  result = result.replace("</pre>", '');
+	                  result = JSON.parse(result);
+	                  results = result.result;
+	                  if(results == "success") {
+	                      layer.msg("圖片上傳成功", {icon: 1});
+	                      window.location.href = "${cp}/control";
+	                  }
+	                  else {
+	                      layer.msg("圖片上傳失敗", {icon: 0});
+	                  }
+
+	              },
+	              error: function ()
+	              {
+	                  layer.alert("圖片上傳錯誤");
+	              }}
+	          );
 		}
 	</script>
 </body>

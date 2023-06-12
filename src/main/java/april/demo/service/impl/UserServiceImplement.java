@@ -54,8 +54,8 @@ public class UserServiceImplement implements UserService {
 	public Response deleteUser(int id) {
 		try {
 			evaluationDao.deleteEvaluationByUser(id);
-			orderDao.deleteOrderByUser(id);
 			cartDao.deleteCartByUser(id);
+			orderDao.deleteOrderByUser(id);
 			userDetailDao.deleteUserDetail(id);
 			userDao.deleteUser(id);
 			return new Response(1, "刪除成功", null);
