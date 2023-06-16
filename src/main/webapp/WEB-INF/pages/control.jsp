@@ -8,17 +8,16 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-VA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>萌芽書屋</title>
-<link rel="stylesheet" type="text/css" href="${cp}/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="${cp}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${cp}/css/style.css" />
 
 <script type="text/javascript" src="${cp}/js/jquery.min.js"></script>
-<script type="text/javascript" src="${cp}/js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="${cp}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${cp}/js/bootpag.min.js"></script>
 <script type="text/javascript" src="${cp}/js/layer.js"></script>
+<script type="text/javascript" src="${cp}/js/ajaxfileupload.js"></script>
 <!-- [if lt IE 9] -->
 <script type="text/javascript" src="${cp}/js/html5shiv.min.js"></script>
 <script type="text/javascript" src="${cp}/js/respond.min.js"></script>
@@ -69,14 +68,14 @@
 								<label for="productName" class="col-sm-2 col-md-2 control-label">商品名稱</label>
 								<div class="col-sm-6 col-md-6">
 									<input type="text" class="form-control" id="productName"
-										placeholder="充電器" />
+										placeholder="好書" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="productName" class="col-sm-2 col-md-2 control-label">作者</label>
 								<div class="col-sm-6 col-md-6">
 									<input type="text" class="form-control" id="author"
-										placeholder="台灣製造"></input>
+										placeholder="好會寫"></input>
 								</div>
 							</div>
 							<div class="form-group">
@@ -84,14 +83,14 @@
 									class="col-sm-2 col-md-2 control-label">商品描述</label>
 								<div class="col-sm-6 col-md-6">
 									<textarea type="text" class="form-control" id="productDescribe"
-										placeholder="手機的生命線"></textarea>
+										placeholder="這是一本好書"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="keyWord" class="col-sm-2 col-md-2 control-label">關鍵字</label>
 								<div class="col-sm-6 col-md-6">
 									<textarea type="text" class="form-control" id="keyWord"
-										placeholder="充電"></textarea>
+										placeholder="其他"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -107,7 +106,7 @@
 									class="col-sm-2 col-md-2 control-label">商品數量</label>
 								<div class="col-sm-6 col-md-6">
 									<input type="text" class="form-control" id="productCount"
-										placeholder="100" />
+										placeholder="1000" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -121,13 +120,16 @@
 									</select>
 								</div>
 							</div>
-							<form class="form-group" enctype="multipart/form-data">
-                                <label for="productImgUpload" class="col-sm-2 col-md-2 control-label" accept="img/jpg">商品圖片</label>
-                                <div class="col-sm-6 col-md-6">
-                                    <input name="productImgUpload" type="file" id="productImgUpload"/>
-                                    <p class="help-block">上傳的圖片大小應為300*400大小</p>
+							<div id="uploadForm"  class="form-group">
+								<label for="productImgUpload"
+									class="col-sm-2 col-md-2 control-label">商品圖片</label>
+								<div class="col-sm-6 col-md-6">
+									<input name="file" type="file"
+										id="productImgUpload" />
+									<p class="help-block">上傳的圖片大小應為300*400大小</p>
 								</div>
-							</form>
+							</div>
+
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-6">
 									<button type="submit" class="btn btn-lg btn-primary btn-block"
@@ -160,15 +162,22 @@
 					+ '<th> Email </th>' + '<th> 是否刪除 </th>' + '</tr>';
 			var html = "";
 			for (var i = 0; i < allUser.length; i++) {
-				html += '<tr>'+
-						'<td>'+allUser[i].id+'</td>'+
-						'<td>'+allUser[i].username+'</td>'+
-						'<td>'+allUser[i].nickName+'</td>'+
-						'<td>'+allUser[i].email+'</td>'+
-						'<td>'+
-						'<button class="btn btn-primary btn-sm" type="submit" onclick="deleteUser('+allUser[i].id+')">刪除</button>'+
-						'</td>'+
-						'</tr>';
+				html += '<tr>'
+						+ '<td>'
+						+ allUser[i].id
+						+ '</td>'
+						+ '<td>'
+						+ allUser[i].username
+						+ '</td>'
+						+ '<td>'
+						+ allUser[i].nickName
+						+ '</td>'
+						+ '<td>'
+						+ allUser[i].email
+						+ '</td>'
+						+ '<td>'
+						+ '<button class="btn btn-primary btn-sm" type="submit" onclick="deleteUser('
+						+ allUser[i].id + ')">刪除</button>' + '</td>' + '</tr>';
 			}
 			userTable.innerHTML += html;
 		}
@@ -183,7 +192,7 @@
 				data : nothing,
 				dataType : 'json',
 				success : function(result) {
-					if (result!=null) {
+					if (result != null) {
 						allUsers = result.allUsers;
 					} else {
 						layer.alert('查詢所有用戶錯誤');
@@ -193,7 +202,7 @@
 					layer.alert('查詢所有用戶error');
 				}
 			});
-			allUsers = eval("("+allUsers+")");
+			allUsers = eval("(" + allUsers + ")");
 			return allUsers;
 		}
 
@@ -204,20 +213,27 @@
 			productArea.innerHTML = '';
 			for (var i = 0; i < allProduct.length; i++) {
 				var imgURL = "${cp}/img/" + allProduct[i].id + ".jpg";
-				html += '<div class="col-sm-4 col-md-4 pd-5">'+
-						'<div class="boxes">'+
-						'<div class="big bigimg">'+
-						'<img src="'+imgURL+'">'+
-						'</div>'+
-						'<p class="font-styles center">'+allProduct[i].name+'</p>'+
-						'<p class="font-styles center">'+allProduct[i].author+'</p>'+
-						'<p class="pull-right">價格：'+allProduct[i].price+'</p>'+
-						'<p class="pull-left">庫存：'+allProduct[i].counts+'</p>'+
-						'<div class = "row">'+
-						'<button class="btn btn-primary delete-button" type="submit" onclick="deleteProduct('+allProduct[i].id+')">刪除商品</button>'+
-						'</div>'+
-						'</div>'+
-						'</div>';
+				html += '<div class="col-sm-4 col-md-4 pd-5">'
+						+ '<div class="boxes">'
+						+ '<div class="big bigimg">'
+						+ '<img src="'+imgURL+'">'
+						+ '</div>'
+						+ '<p class="font-styles center">'
+						+ allProduct[i].name
+						+ '</p>'
+						+ '<p class="font-styles center">'
+						+ allProduct[i].author
+						+ '</p>'
+						+ '<p class="pull-right">價格：'
+						+ allProduct[i].price
+						+ '</p>'
+						+ '<p class="pull-left">庫存：'
+						+ allProduct[i].counts
+						+ '</p>'
+						+ '<div class = "row">'
+						+ '<button class="btn btn-primary delete-button" type="submit" onclick="deleteProduct('
+						+ allProduct[i].id + ')">刪除商品</button>' + '</div>'
+						+ '</div>' + '</div>';
 			}
 			productArea.innerHTML += html;
 		}
@@ -248,25 +264,25 @@
 		}
 
 		function deleteUser(id) {
-	         var user = {};
-	         user.id = id;
-	         var deleteResult = "";
-	         $.ajax({
-	             async : false,
-	             type : 'POST',
-	             url : '${cp}/deleteUser',
-	             data : user,
-	             dataType : 'json',
-	             success : function(result) {
-	                 deleteResult = result;
-	             },
-	             error : function(result) {
-	                 layer.alert('刪除用戶錯誤');
-	             }
-	         });
-	         layer.msg(deleteResult.message);
-	         listAllUser();
-	     }
+			var user = {};
+			user.id = id;
+			var deleteResult = "";
+			$.ajax({
+				async : false,
+				type : 'POST',
+				url : '${cp}/deleteUser',
+				data : user,
+				dataType : 'json',
+				success : function(result) {
+					deleteResult = result;
+				},
+				error : function(result) {
+					layer.alert('刪除用戶錯誤');
+				}
+			});
+			layer.msg(deleteResult.message);
+			listAllUser();
+		}
 
 		function deleteProduct(id) {
 			var product = {};
@@ -327,14 +343,14 @@
 		function fileUpload() {
 	          var results = "";
 	          var name = document.getElementById("productName").value;
-	          $.ajax({
+	          $.ajaxFileUpload({
 	              url:'${cp}/uploadFile?name='+name,
 	              secureuri:false ,
 	              fileElementId:'productImgUpload',
 	              type:'POST',
 	              dataType : 'text',
 	              success: function (result){
-	                  result = result.replace(/<pre.*?>/g, '');
+	                  result = result.replace(/<pre.*?>/g, '');  //ajaxFileUpload会对服务器响应回来的text内容加上<pre style="....">text</pre>前后缀
 	                  result = result.replace(/<PRE.*?>/g, '');
 	                  result = result.replace("<PRE>", '');
 	                  result = result.replace("</PRE>", '');
@@ -343,20 +359,23 @@
 	                  result = JSON.parse(result);
 	                  results = result.result;
 	                  if(results == "success") {
-	                      layer.msg("圖片上傳成功", {icon: 1});
+	                      layer.msg("图片上传成功", {icon: 1});
 	                      window.location.href = "${cp}/control";
+	                      //var imgPreSee = document.getElementById("imgPreSee");
+	                      //var imgSrc = '${cp}/img/'+name+'.jpg';
+	                      //imgPreSee.innerHTML +='<img src="'+imgSrc+')" class="col-sm-12 col-md-12 col-lg-12"/>';
 	                  }
 	                  else {
-	                      layer.msg("圖片上傳失敗", {icon: 0});
+	                      layer.msg("图片上传失败", {icon: 0});
 	                  }
 
 	              },
 	              error: function ()
 	              {
-	                  layer.alert("圖片上傳錯誤");
+	                  layer.alert("上传错误");
 	              }}
 	          );
-		}
+	      }
 	</script>
 </body>
 </html>

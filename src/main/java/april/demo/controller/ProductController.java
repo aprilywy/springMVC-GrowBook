@@ -98,11 +98,11 @@ public class ProductController {
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> uploadFile(@RequestParam MultipartFile productImgUpload,String name, HttpServletRequest request) {
+    public Map<String, Object> uploadFile(@RequestParam("file") MultipartFile productImgUpload,String name, HttpServletRequest request) {
         String result = "fail";
         try{
             if(productImgUpload != null && !productImgUpload.isEmpty()) {
-                String fileRealPath = request.getSession().getServletContext().getRealPath("/static/img");
+                String fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/static/img/");
                 int id = productService.getProduct(name).getId();
                 String fileName = String.valueOf(id)+".jpg";
                 File fileFolder = new File(fileRealPath);

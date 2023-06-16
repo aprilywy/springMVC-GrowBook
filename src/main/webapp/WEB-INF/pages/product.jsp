@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="${cp}/css/style.css" />
 
 <script type="text/javascript" src="${cp}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${cp}/js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="${cp}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${cp}/js/bootpag.min.js"></script>
 <script type="text/javascript" src="${cp}/js/layer.js"></script>
