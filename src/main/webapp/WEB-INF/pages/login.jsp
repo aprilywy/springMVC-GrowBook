@@ -86,7 +86,7 @@
 					icon : 1
 				});
 				window.location.href = "${cp}/index";
-			} else if (loginResult == 'nameExist') {
+			} else if (loginResult == 'unexist') {
 				layer.msg('是不是帳號記錯了', {
 					icon : 2
 				});
